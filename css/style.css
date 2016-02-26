@@ -1,0 +1,50 @@
+
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 980px;
+
+  outline: 1px dashed red;
+}
+
+.stopwatch-clock {
+  text-align: center;
+
+  outline: 1px dashed red;
+}
+
+.stopwatch-control {
+
+  outline: 1px dashed red;
+}
+
+.stopwatch-control .clock-control {
+  float: left;
+
+  outline: 1px dashed red;
+}
+
+.stopwatch-control .screen-control {
+  float: right;
+
+  outline: 1px dashed red;
+}
+
+.content-wrapper {
+  text-align: center;
+
+  outline: 1px dashed red;
+}
+
+.stopwatch-list {
+  display: inline-block;
+  margin: 0;
+
+  outline: 1px dashed red;
+}

@@ -3,29 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Электронный секундомер</title>
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
     <main class="wrapper">
-      <div class="stopwatch">
-        <div class="stopwatch-clock">
-          <span class="clock-digit hidden">0</span>
-          <span class="clock-digit hidden">0</span>
-          <span class="clock-separator hidden">ч</span>
-          <span class="clock-digit hidden">0</span>
-          <span class="clock-digit hidden">0</span>
-          <span class="clock-separator hidden">м</span>
-          <span class="clock-digit hidden">0</span>
-          <span class="clock-digit">0</span>
-          <span class="clock-separator">с</span>
-          <span class="clock-digit">0</span>
-          <span class="clock-digit">0</span>
-        </div>
-        <div class="stopwatch-control">
+      <div class="stopwatch-clock">
+        <span class="clock-digit hidden">0</span>
+        <span class="clock-digit hidden">0</span>
+        <span class="clock-separator hidden">ч</span>
+        <span class="clock-digit hidden">0</span>
+        <span class="clock-digit hidden">0</span>
+        <span class="clock-separator hidden">м</span>
+        <span class="clock-digit hidden">0</span>
+        <span class="clock-digit">0</span>
+        <span class="clock-separator">с</span>
+        <span class="clock-digit">0</span>
+        <span class="clock-digit">0</span>
+      </div>
+      <div class="stopwatch-control clearfix">
+        <div class="clock-control">
           <button class="btn" data-caption="Стоп">Старт</button>
           <button class="btn">Сброс</button>
           <button class="btn">Круг</button>
-          <div class="fullscreen"></div>
         </div>
+        <div class="screen-control">*</div>
+      </div>
+      <div class="content-wrapper">
         <ol class="stopwatch-list" reversed>
           <li class="list-item">
             <span class="clock-digit hidden">0</span>
