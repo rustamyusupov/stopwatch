@@ -1,1 +1,1 @@
-# Электронный секундомер
+# Electronic stopwatch like Google
