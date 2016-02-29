@@ -1,10 +1,45 @@
+var startBtn = document.querySelector(".start-btn");
+var resetBnt = document.querySelector(".reset-btn");
+var lapBtn = document.querySelector(".lap-btn");
 var fullscreenBtn = document.querySelector(".fullscreen");
 
+startBtn.addEventListener("click", startStopTimer);
+resetBnt.addEventListener("click", resetTimer);
+lapBtn.addEventListener("click", lapTime);
 fullscreenBtn.addEventListener("click", toggleFullScreen);
 document.addEventListener('webkitfullscreenchange', changeBtnImage);
 document.addEventListener('mozfullscreenchange', changeBtnImage);
 document.addEventListener("MSFullscreenChange", changeBtnImage);
 document.addEventListener('fullscreenchange', changeBtnImage);
+
+function startStopTimer() {
+  changeBtnCaption();
+
+}
+
+function resetTimer() {
+
+}
+
+function lapTime() {
+
+}
+
+function changeBtnCaption() {
+  var dataCaption = startBtn.getAttribute("data-caption");
+
+  if (dataCaption != startBtn.innerHTML) {
+    startBtn.setAttribute("data-caption", startBtn.innerHTML);
+    startBtn.innerHTML = dataCaption;
+  } else {
+    startBtn.setAttribute("data-caption", startBtn.innerHTML);
+    startBtn.innerHTML = dataCaption;
+  }
+}
+
+function showHideElem(element) {
+  element.classList.toggle("hidden");
+}
 
 function changeBtnImage() {
   fullscreenBtn.classList.toggle("fullscreen-exit");
