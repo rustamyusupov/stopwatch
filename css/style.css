@@ -55,10 +55,6 @@ body {
   color: #333333;
 }
 
-.hidden {
-  display: none;
-}
-
 .stopwatch-clock {
   border-bottom: 4px solid #ebebeb;
   font-size: 0;
@@ -72,7 +68,8 @@ body {
   font-size: 190px;
 }
 
-.stopwatch-clock .clock-digit-small {
+.stopwatch-clock .clock-digit-small,
+.list-item .clock-digit {
   font-size: 95px;
 }
 
@@ -138,8 +135,16 @@ body {
 }
 
 .stopwatch-list {
-  display: inline-block;
   margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.stopwatch-list li,
+.list-item .clock-digit-small,
+.list-item .clock-separator {
+  font-size: 45px;
 }
 
 .stopwatch-list .list-item {
@@ -147,14 +152,15 @@ body {
 }
 
 .list-item .clock-digit {
-  font-size: 95px;
-}
-
-.list-item .clock-digit-small {
-  font-size: 45px;
+  display: inline-block;
+  vertical-align: sub;
 }
 
 .list-item .clock-separator {
-  font-size: 45px;
   margin-right: 25px;
+}
+
+.hidden,
+.list-item .hidden {
+  display: none;
 }
