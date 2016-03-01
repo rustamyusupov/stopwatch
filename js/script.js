@@ -91,21 +91,24 @@ function now() {
 }
 
 function formatTime(time) {
-	var h = m = s = ms = 0;
-	var newTime = '';
+  var hours = minutes = seconds = ms = 0;
+  var h1 = h2 = m1 = m2 = s1 = s2 = 0;
 
-	h = Math.floor( time / (60 * 60 * 1000) );
-	time = time % (60 * 60 * 1000);
-	m = Math.floor( time / (60 * 1000) );
-	time = time % (60 * 1000);
-	s = Math.floor( time / 1000 );
-	ms = time % 1000;
+  hours = Math.floor( time / (60 * 60 * 1000) );
+  h1 = Math.floor( hours / 10 );
+  h2 = hours % 10;
+  time = time % (60 * 60 * 1000);
 
-	newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
-	return newTime;
-}
+  minutes = Math.floor( time / (60 * 1000) );
+  m1 = Math.floor( minutes / 10 );
+  m2 = minutes % 10;
+  time = time % (60 * 1000);
 
-function pad(num, size) {
-	var s = "0000" + num;
-	return s.substr(s.length - size);
+  seconds = Math.floor( time / 1000 );
+  s1 = Math.floor( seconds / 10 );
+  s2 = seconds % 10;
+
+  ms = Math.floor( (time % 1000) / 10 );
+
+	return s1 + "" + s2 + ":" + ms;
 }
