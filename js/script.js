@@ -12,16 +12,6 @@ document.addEventListener('mozfullscreenchange', changeBtnImage);
 document.addEventListener("MSFullscreenChange", changeBtnImage);
 document.addEventListener('fullscreenchange', changeBtnImage);
 
-
-
-function resetTimer() {
-  clearInterval(timerId);
-}
-
-function lapTime() {
-
-}
-
 function changeBtnCaption() {
   var dataCaption = startBtn.getAttribute("data-caption");
 
@@ -67,48 +57,25 @@ function toggleFullScreen() {
   }
 }
 
-
-
 var clockDigit = document.querySelector(".stopwatch-clock .clock-digit");
-var startTime;
-var timerId;
+//var x = new stopWatch();
+
 
 function startStopTimer() {
-  // changeBtnCaption();
+  changeBtnCaption();
 
-  startTime = now();
-  timerId = setInterval(setTime, 1);
+  stopWatch.start(setTime);
 }
 
-
-function setTime() {
-
-  clockDigit.innerHTML = formatTime( now() - startTime );
+function resetTimer() {
+  stopWatch.reset();
+  clockDigit.innerHTML = "";
 }
 
-function now() {
-  return (new Date()).getTime();
+function lapTime() {
+
 }
 
-function formatTime(time) {
-  var hours = minutes = seconds = ms = 0;
-  var h1 = h2 = m1 = m2 = s1 = s2 = 0;
-
-  hours = Math.floor( time / (60 * 60 * 1000) );
-  h1 = Math.floor( hours / 10 );
-  h2 = hours % 10;
-  time = time % (60 * 60 * 1000);
-
-  minutes = Math.floor( time / (60 * 1000) );
-  m1 = Math.floor( minutes / 10 );
-  m2 = minutes % 10;
-  time = time % (60 * 1000);
-
-  seconds = Math.floor( time / 1000 );
-  s1 = Math.floor( seconds / 10 );
-  s2 = seconds % 10;
-
-  ms = Math.floor( (time % 1000) / 10 );
-
-	return s1 + "" + s2 + ":" + ms;
+function setTime(time) {
+  clockDigit.innerHTML = time.m1 + "" + time.m2 + ":" + time.s1 + "" + time.s2 + ":" + time.ms1 + "" + time.ms2;
 }
