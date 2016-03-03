@@ -21,16 +21,18 @@ function changeBtnImage() {
 }
 
 function toggleFullScreen() {
+  var docEl = document.documentElement;
+
   if (!document.fullscreenElement &&
       !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) {
-      document.documentElement.msRequestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) {
-      document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    if (docEl.requestFullscreen) {
+      docEl.requestFullscreen();
+    } else if (docEl.msRequestFullscreen) {
+      docEl.msRequestFullscreen();
+    } else if (docEl.mozRequestFullScreen) {
+      docEl.mozRequestFullScreen();
+    } else if (docEl.webkitRequestFullscreen) {
+      docEl.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
     }
   } else {
     if (document.exitFullscreen) {
@@ -54,6 +56,7 @@ function toggleStartStop() {
 }
 
 var clockDigit = document.querySelector(".stopwatch-clock .clock-digit");
+var clockDigitList = document.querySelector(".stopwatch-list .clock-digit");
 
 function startStopTimer() {
   if (stopWatch.state) {
@@ -74,10 +77,13 @@ function resetTimer() {
 
   stopWatch.reset();
   clockDigit.innerHTML = "00:00:00";
+  clockDigitList.innerHTML = "00:00:00";
 }
 
 function lapTime() {
-
+  var clockDigitList = document.querySelector(".stopwatch-list .clock-digit");
+  var time = stopWatch.lap();
+  clockDigitList.innerHTML = time.m1 + "" + time.m2 + ":" + time.s1 + "" + time.s2 + ":" + time.ms1 + "" + time.ms2;
 }
 
 function setTime(time) {
