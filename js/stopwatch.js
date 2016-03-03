@@ -3,7 +3,9 @@ var stopWatch = (function() {
 
   var timerId;
   var startAt = 0;
+  var stopAt = 0;
   var lapTime = 0;
+  var state = false;
 
   var time = {
     h1: 0,
@@ -16,24 +18,29 @@ var stopWatch = (function() {
     ms2: 0
   };
 
- var start = function(func) {
-    startAt = now();
+  var start = function(func) {
+    startAt = startAt ? startAt : now();
+    this.state = true;
 
     timerId = setInterval( function() {
-      formatTime( now() - startAt );
+      formatTime( now() - startAt + stopAt);
 
       func(time);
     }, 1 );
   };
 
   var stop = function() {
+    stopAt = startAt ? stopAt + now() - startAt : stopAt;
+    startAt = 0;
+    this.state = false;
+
     clearInterval(timerId);
   };
 
   var reset = function() {
-    stop();
+    startAt = stopAt = 0;
 
-    lapTime = startAt = 0;
+    this.stop();
   };
 
   var lap = function() {
@@ -72,6 +79,7 @@ var stopWatch = (function() {
   return {
     start: start,
     stop: stop,
-    reset: reset
+    reset: reset,
+    state: state
   }
 })();

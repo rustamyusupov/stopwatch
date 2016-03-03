@@ -12,18 +12,6 @@ document.addEventListener('mozfullscreenchange', changeBtnImage);
 document.addEventListener("MSFullscreenChange", changeBtnImage);
 document.addEventListener('fullscreenchange', changeBtnImage);
 
-function changeBtnCaption() {
-  var dataCaption = startBtn.getAttribute("data-caption");
-
-  if (dataCaption != startBtn.innerHTML) {
-    startBtn.setAttribute("data-caption", startBtn.innerHTML);
-    startBtn.innerHTML = dataCaption;
-  } else {
-    startBtn.setAttribute("data-caption", startBtn.innerHTML);
-    startBtn.innerHTML = dataCaption;
-  }
-}
-
 function showHideElem(element) {
   element.classList.toggle("hidden");
 }
@@ -57,19 +45,35 @@ function toggleFullScreen() {
   }
 }
 
-var clockDigit = document.querySelector(".stopwatch-clock .clock-digit");
-//var x = new stopWatch();
 
+function toggleStartStop() {
+  var dataCaption = startBtn.getAttribute("data-caption");
+
+  startBtn.setAttribute("data-caption", startBtn.innerHTML);
+  startBtn.innerHTML = dataCaption;
+}
+
+var clockDigit = document.querySelector(".stopwatch-clock .clock-digit");
 
 function startStopTimer() {
-  changeBtnCaption();
+  if (stopWatch.state) {
+    stopWatch.stop();
+  } else {
+    stopWatch.start(setTime);
+  }
 
-  stopWatch.start(setTime);
+  toggleStartStop();
 }
 
 function resetTimer() {
+
+  // if not paused
+  if (stopWatch.state) {
+    toggleStartStop();
+  }
+
   stopWatch.reset();
-  clockDigit.innerHTML = "";
+  clockDigit.innerHTML = "00:00:00";
 }
 
 function lapTime() {
