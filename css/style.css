@@ -147,6 +147,7 @@ body {
 
 .stopwatch-list .list-item {
   font-size: 0;
+  text-align: left;
 }
 
 .list-item .clock-digit {
