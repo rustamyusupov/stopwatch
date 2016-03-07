@@ -1,5 +1,5 @@
 var stopWatch = (function() {
-  "use strict";
+  'use strict';
 
   var timerId;
   var startAt = 0;
@@ -66,29 +66,39 @@ var stopWatch = (function() {
   };
 
   var formatTime = function(diff) {
-    var hours = 0;
-    var minutes = 0;
-    var seconds = 0;
-    var ms = 0;
-    var time = {};
+    var hours, minutes, seconds, ms;
+    var time = [];
 
-    hours = Math.floor( diff / (60 * 60 * 1000) );
-    time.h1 = Math.floor( hours / 10 );
-    time.h2 = hours % 10;
-    diff = diff % (60 * 60 * 1000);
+    switch (true) {
+      case (diff >= 36000000): //hours
+        hours = Math.floor( diff / (60 * 60 * 1000) );
+        time[0] = Math.floor( hours / 10 );
 
-    minutes = Math.floor( diff / (60 * 1000) );
-    time.m1 = Math.floor( minutes / 10 );
-    time.m2 = minutes % 10;
-    diff = diff % (60 * 1000);
+      case (diff >= 3600000): // hour
+        hours = Math.floor( diff / (60 * 60 * 1000) );
+        time[1] = hours % 10;
+        diff = diff % (60 * 60 * 1000);
 
-    seconds = Math.floor( diff / 1000 );
-    time.s1 = Math.floor( seconds / 10 );
-    time.s2 = seconds % 10;
+      case (diff >= 600000): // minutes
+        minutes = Math.floor( diff / (60 * 1000) );
+        time[2] = Math.floor( minutes / 10 );
 
-    ms = Math.floor( (diff % 1000) / 10 );
-    time.ms1 = Math.floor( ms / 10 );
-    time.ms2 = ms % 10;
+      case (diff >= 60000): // minute
+        minutes = Math.floor( diff / (60 * 1000) );
+        time[3] = minutes % 10;
+        diff = diff % (60 * 1000);
+
+      case (diff >= 10000): // seconds
+        seconds = Math.floor( diff / 1000 );
+        time[4] = Math.floor( seconds / 10 );
+        
+      default: // second
+        seconds = Math.floor( diff / 1000 );
+        time[5] = seconds % 10;
+        ms = Math.floor( (diff % 1000) / 10 );
+        time[6] = Math.floor( ms / 10 );
+        time[7] = ms % 10;
+    }
 
     return time;
   };
