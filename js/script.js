@@ -23,6 +23,7 @@ function resetTimer() {
 
   stopWatch.reset();
 
+  // stopWatch
   hideElem(clockSeparators[0]);
   hideElem(clockSeparators[1]);
 
@@ -30,6 +31,11 @@ function resetTimer() {
     if (i < 5) hideElem(clockDigits[i]);
 
     clockDigits[i].innerHTML = 0;
+  }
+
+  // Lap list
+  while( clockDigitsList.firstChild ){
+    clockDigitsList.removeChild( clockDigitsList.firstChild );
   }
 }
 

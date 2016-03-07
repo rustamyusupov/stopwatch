@@ -38,17 +38,6 @@ var stopWatch = (function() {
   };
 
   var lap = function() {
-    //// Time on the clock
-    //var clockTime = startAt ? stopAt + now() - startAt : stopAt;
-    //
-    //// Last lap time
-    //var lastLap = clockTime - lapTime;
-    //
-    //// New lap
-    //lapTime = clockTime;
-    //
-    //return formatTime( lastLap );
-
     // Time on the clock
     var clockTime = startAt ? stopAt + now() - startAt : stopAt;
 
@@ -91,7 +80,7 @@ var stopWatch = (function() {
       case (diff >= 10000): // seconds
         seconds = Math.floor( diff / 1000 );
         time[4] = Math.floor( seconds / 10 );
-        
+
       default: // second
         seconds = Math.floor( diff / 1000 );
         time[5] = seconds % 10;
