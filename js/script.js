@@ -78,6 +78,7 @@ function addListItem(time) {
   var li = document.createElement('li');
   var html;
 
+  // It's not good idea, but deadline :(
   html = '<div class="list-item">';
 
   switch (true) {

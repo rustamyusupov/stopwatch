@@ -17,6 +17,7 @@ var stopWatch = (function() {
       // Elapsed time from the start
       var time = formatTime( now() - startAt + stopAt );
 
+      // It's not good idea, but deadline :(
       func(time);
     }, 1 );
   };
