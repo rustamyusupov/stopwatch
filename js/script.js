@@ -68,34 +68,36 @@ function tglStartStopCaption() {
   startBtn.innerHTML = dataCaption;
 }
 
-function addListItem() {
+function addListItem(time) {
   var li = document.createElement('li');
   var html;
 
   html = '<div class="list-item">';
 
-  
-
-  html += '</div>';
+  switch (true) {
+    case (0 in time):
+      html += '<span class="clock-digit">' + time[0] + '</span>';
+    case (1 in time):
+      html += '<span class="clock-digit">' + time[1] + '</span>';
+      html += '<span class="clock-separator">h</span>';
+    case (2 in time):
+      html += '<span class="clock-digit">' + time[2] + '</span>';
+    case (3 in time):
+      html += '<span class="clock-digit">' + time[3] + '</span>';
+      html += '<span class="clock-separator">m</span>';
+    case (4 in time):
+      html += '<span class="clock-digit">' + time[4] + '</span>';
+    default:
+      html += '<span class="clock-digit">' + time[5] + '</span>';
+      html += '<span class="clock-separator">s</span>'
+      html += '<span class="clock-digit clock-digit-small">' + time[6] + '</span>';
+      html += '<span class="clock-digit clock-digit-small">' + time[7] + '</span>';
+      html += '</div>';
+  }
 
   li.innerHTML = html;
-  clockDigitsList.appendChild(li);
+  clockDigitsList.insertBefore(li, clockDigitsList.childNodes[0]);
 }
-
-// <div class="list-item">
-//   <span class="clock-digit hidden">0</span>
-//   <span class="clock-digit hidden">0</span>
-//   <span class="clock-separator hidden">h</span>
-//   <span class="clock-digit hidden">0</span>
-//   <span class="clock-digit hidden">0</span>
-//   <span class="clock-separator hidden">m</span>
-//   <span class="clock-digit hidden">0</span>
-//   <span class="clock-digit">0</span>
-//   <span class="clock-separator">s</span>
-//   <span class="clock-digit clock-digit-small">0</span>
-//   <span class="clock-digit clock-digit-small">0</span>
-// </div>
-
 
 //fullscreenBtn.addEventListener("click", toggleFullScreen);
 //document.addEventListener('webkitfullscreenchange', tglFSBtnImg);
