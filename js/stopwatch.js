@@ -3,41 +3,62 @@ var stopWatch = (function() {
 
   var timerId;
   var startAt = 0;
+  var stopAt = 0;
   var lapTime = 0;
+  var state = false;
 
-  var time = {
-    h1: 0,
-    h2: 0,
-    m1: 0,
-    m2: 0,
-    s1: 0,
-    s2: 0,
-    ms1: 0,
-    ms2: 0
-  };
+  var start = function(func) {
+    // Last start time or not running
+    startAt = startAt ? startAt : now();
 
- var start = function(func) {
-    startAt = now();
+    this.state = true;
 
     timerId = setInterval( function() {
-      formatTime( now() - startAt );
+      // Elapsed time from the start
+      var time = formatTime( now() - startAt + stopAt );
 
       func(time);
     }, 1 );
   };
 
   var stop = function() {
+    // Time on the clock
+    stopAt = startAt ? stopAt + now() - startAt : stopAt;
+
+    startAt = 0;
+    this.state = false;
+
     clearInterval(timerId);
   };
 
   var reset = function() {
-    stop();
+    startAt = stopAt = lapTime= 0;
 
-    lapTime = startAt = 0;
+    this.stop();
   };
 
   var lap = function() {
+    //// Time on the clock
+    //var clockTime = startAt ? stopAt + now() - startAt : stopAt;
+    //
+    //// Last lap time
+    //var lastLap = clockTime - lapTime;
+    //
+    //// New lap
+    //lapTime = clockTime;
+    //
+    //return formatTime( lastLap );
 
+    // Time on the clock
+    var clockTime = startAt ? stopAt + now() - startAt : stopAt;
+
+    // Last lap time
+    var lastLap = formatTime( clockTime - lapTime );
+
+    // New lap
+    lapTime = clockTime;
+
+    return lastLap;
   };
 
   var now = function() {
@@ -49,6 +70,7 @@ var stopWatch = (function() {
     var minutes = 0;
     var seconds = 0;
     var ms = 0;
+    var time = {};
 
     hours = Math.floor( diff / (60 * 60 * 1000) );
     time.h1 = Math.floor( hours / 10 );
@@ -67,11 +89,15 @@ var stopWatch = (function() {
     ms = Math.floor( (diff % 1000) / 10 );
     time.ms1 = Math.floor( ms / 10 );
     time.ms2 = ms % 10;
+
+    return time;
   };
 
   return {
     start: start,
     stop: stop,
-    reset: reset
+    reset: reset,
+    lap: lap,
+    state: state
   }
 })();
